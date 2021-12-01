@@ -1,6 +1,7 @@
 import turtle as t
 import time
 from Snake import Snake
+from Food import Food
 
 
 def stop_game():
@@ -14,8 +15,9 @@ screen.bgcolor('black')
 screen.title('Snace game')
 screen.tracer(0)
 
-
 snake = Snake()
+food = Food()
+
 screen.listen()
 screen.onkey(key="space", fun=stop_game)
 screen.onkey(key="Left", fun=snake.go_left)
@@ -25,9 +27,13 @@ screen.onkey(key="Down", fun=snake.go_down)
 
 is_game_on = True
 while is_game_on:
-    snake.move()
     screen.update()
     time.sleep(0.1)
+    snake.move()
+    if snake.head.distance(food) < 15:
+        print("nom nom nom")
+        food.refresh()
+    
     print(f"Positions after step {snake.get_snake_segments_positions()}")
 
 screen.exitonclick()
