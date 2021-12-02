@@ -37,6 +37,12 @@ while is_game_on:
         food.refresh()
         score.increase_score()
     
+    snake_x = abs(snake.head.xcor())
+    snake_y = abs(snake.head.ycor())
+    if snake_x > 280 or snake_y > 280:
+        stop_game()
+        score.game_over()
+    
     print(f"Positions after step {snake.get_snake_segments_positions()}")
 
 screen.exitonclick()
