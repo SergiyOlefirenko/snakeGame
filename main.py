@@ -1,30 +1,27 @@
 import turtle as t
 import time
+from Playfield import Playfield
 from Snake import Snake
 from Food import Food
 from Scoreboard import Scoreboard
+
 
 
 def main():
     snake = Snake()
     food = Food()
     score = Scoreboard()
+    screen = Playfield()
 
-    # initalize screen 
-    screen = t.Screen()
-    screen.setup(width=600, height=600)
-    screen.bgcolor('black')
-    screen.title('Snace game')
-    screen.tracer(0)
-    screen.listen()
-    screen.onkey(key="Left", fun=snake.go_left)
-    screen.onkey(key="Right", fun=snake.go_right)
-    screen.onkey(key="Up", fun=snake.go_up)
-    screen.onkey(key="Down", fun=snake.go_down)
+    # initialize screen 
+    screen.playfield.onkey(key="Left", fun=snake.go_left)
+    screen.playfield.onkey(key="Right", fun=snake.go_right)
+    screen.playfield.onkey(key="Up", fun=snake.go_up)
+    screen.playfield.onkey(key="Down", fun=snake.go_down)
 
     is_game_on = True
     while is_game_on:
-        screen.update()
+        screen.playfield.update()
         time.sleep(0.1)
         snake.move()
 
@@ -44,7 +41,7 @@ def main():
                 is_game_on = False
                 score.game_over()
 
-    screen.exitonclick()
+    screen.playfield.exitonclick()
 
 
 if __name__ == "__main__":
